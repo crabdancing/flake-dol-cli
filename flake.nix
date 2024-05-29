@@ -1,3 +1,8 @@
+# TODO:
+# - remove symlinkJoin from tui impl.
+# - instead of exposing a package, we will expose a module.
+# - module must include common (non-secret) configuration,
+# - patches, fixes, and shells themselves.
 {
   description = "A simple flake containing a common set of TUI tools";
 
