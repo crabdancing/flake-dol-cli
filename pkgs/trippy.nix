@@ -12,6 +12,5 @@
         --add-flags --geoip-mmdb-file --add-flags ${geoip-db}/share/db/GeoLite2-City.mmdb
     '';
   };
-in {
-  inherit trippy;
-}
+in
+  trippy

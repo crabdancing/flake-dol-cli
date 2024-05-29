@@ -23,10 +23,27 @@
 
       geoip-db =
         inputs.flake-geoip.packages.${system}.default;
-    in {
-      # Packages exposed by this flake
-      packages = pkgs.callPackage pkgs/trippy.nix {
+      trippy = pkgs.callPackage pkgs/trippy.nix {
         inherit geoip-db;
+      };
+      paths =
+        [
+          trippy
+        ]
+        ++ (with pkgs; [
+          du-dust
+          diskonaut
+        ]);
+      # experimenting with this approach, but honestly, clobbering file trees this way seems kinda dumb
+      # probably should just build a nix module and add the packages that way
+      tui = pkgs.symlinkJoin {
+        name = "tui";
+        inherit paths;
+      };
+    in {
+      packages = {
+        inherit trippy tui;
+        default = tui;
       };
     });
 }
